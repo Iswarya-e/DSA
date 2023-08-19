@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void addVertex(vector<int> list[], int src,int dest)  
+{
+    list[src].push_back(dest);
+}
+void printBFSGraph(vector<int> adj[],int src,vector<bool> &visited)
+{
+    std::queue<int> q;
+    q.push(src);
+    visited[src]=true;
+
+    while(!q.empty())
+    {
+        int next=q.front();
+        q.pop();
+        cout<<next<<" ";
+        
+        for(auto adjacent:adj[next])
+        {
+            if(!visited[adjacent])
+            {
+                q.push(adjacent);
+                visited[adjacent]=true;
+            }
+        }
+    }
+}
+void printBFSGraphUtil(vector<int> adj[],int v)
+{
+   vector<bool> visited(v,false);
+   for(int i=0;i<v;i++)
+   {
+       if(!visited[i])
+       {
+           printBFSGraph(adj,i,visited);
+       }
+   }
+}
+    
+int main()
+{
+    int vertices=5;
+    vector<int> adj[vertices];
+    addVertex(adj,0,4);
+    addVertex(adj,1,2);
+    addVertex(adj,1,3);
+    addVertex(adj,1,4);
+    addVertex(adj,2,3);
+    addVertex(adj,3,4);
+
+    printBFSGraphUtil(adj,5);
+    return 0;
+
+}
