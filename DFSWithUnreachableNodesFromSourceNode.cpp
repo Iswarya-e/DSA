@@ -10,6 +10,8 @@ void printDFSGraph(vector<int> adj[],int src,vector<bool> &visited)
     std::stack<int> s;
 
     s.push(src);
+    visited[src]=true;
+
     while(!s.empty())
     {
         int next=s.top();
