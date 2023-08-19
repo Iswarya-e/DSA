@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void addVertex(vector<int> list[], int src,int dest)  
+{
+    list[src].push_back(dest);
+}
+void printList(vector<int> adj[],int v)
+{
+    for(int i=0;i<v;i++)
+    {
+        cout<<endl<<i;
+        for(int j=0;j<adj[i].size();j++){
+            cout<<"-"<<adj[i][j];
+        }
+    }
+}
+void transposeGraph(vector<int> adj[],vector<int> transpose[], int v)
+{
+    for(int i=0;i<v;i++)
+    {
+        for(int j=0;j<adj[i].size();j++)
+        {
+            addVertex(transpose,adj[i][j],i);
+        }
+    }
+}
+    
+int main()
+{
+    int vertices=5;
+    vector<int> adj[vertices];
+    vector<int> transpose[vertices];
+    addVertex(adj,0,1);
+    addVertex(adj,0,3);
+    addVertex(adj,0,4);
+    addVertex(adj,2,0);
+    addVertex(adj,3,2);
+    addVertex(adj,4,1);
+    addVertex(adj,4,3);
+    transposeGraph(adj,transpose,vertices);
+    printList(transpose,vertices);
+
+
+    
+    
+    return 0;
+
+}
