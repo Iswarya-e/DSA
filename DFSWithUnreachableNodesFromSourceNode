@@ -14,16 +14,14 @@ void printDFSGraph(vector<int> adj[],int src,vector<bool> &visited)
     {
         int next=s.top();
         s.pop();
-        if(!visited[next])
-        {
-            cout<<next<<" ";
-            visited[next]=true;
-        }
+        cout<<next<<" ";
+        
         for(auto adjacent:adj[next])
         {
             if(!visited[adjacent])
             {
                 s.push(adjacent);
+                visited[adjacent]=true;
             }
         }
     }
