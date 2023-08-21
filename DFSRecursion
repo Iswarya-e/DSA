@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void addVertex(vector<int> list[], int src,int dest)  
+{
+    list[src].push_back(dest);
+}
+
+void DFS(int src,vector<int> adj[],vector<int> &vis)
+{
+    cout<<src;
+    vis[src]=true;
+    for(auto it:adj[src])
+    {
+        if(!vis[it])
+        {
+            DFS(it,adj,vis);
+        }
+    }
+    
+}
+    
+int main()
+{
+    int vertices=5;
+    vector<int> adj[vertices];
+    
+    
+    vector<int> vis(vertices,false);
+    
+    addVertex(adj,0,1);
+    addVertex(adj,0,2);
+    addVertex(adj,3,5);
+    addVertex(adj,2,3);
+    addVertex(adj,2,4);
+    DFS(0,adj,vis);
+    return 0;
+
+}
