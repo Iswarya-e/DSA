@@ -1,0 +1,29 @@
+Graph: set of edges and nodes
+Path: Node cannot appear twice in a path,lot of nodes that are reachable
+
+Degree- Number of edges attached to it
+In degree- Number of edges coming to the node
+Out Degree -Number of edged going out of the node
+Total number of degree = 2 X Edges
+
+
+
+BFS: Level wise traversal
+
+Algo:
+1.create a visted array
+2.Get the source node
+3.mark the source node as visited
+4.push it to the queue
+5.until queue is empty
+  5.1 pop the front element and store it in a variable and print it(or store)
+  5.2 iterate through each neighbour of the source node(adj[src])
+  5.3 if neighout i is not visited
+    a.mark it as visited
+    b.push it to the queue
+  5.4 if neighbour is visited, move on the next neighbour of src
+6.when queue is empty -->return
+
+TC: O(N)+O(2E)
+
+DFS: 
