@@ -23,19 +23,49 @@ class Solution {
      }
      
  }
+ void BFSFloodFill(vector<vector<int>>& image,vector<vector<int>>& imageCopy,int sr,int sc,
+ int newColour,int oldColour,int mr, int mc)
+ {
+     imageCopy[sr][sc]=newColour;
+     queue<pair<int,int>> q;
+     q.push({sr,sc});
+     while(!q.empty())
+     {
+        int nr1=q.front().first;
+        int nc1=q.front().second;
+        q.pop();
+        for(int dr=-1;dr<=1;dr++)
+        {
+             for(int dc=-1;dc<=1;dc++)
+             {
+                 if(abs(dc)==abs(dr)) continue;
+                 int nr=nr1+dr;
+                 int nc=nc1+dc;
+                 
+                 if(nr>=0 && nr<mr && nc>=0 && nc<mc &&
+                 imageCopy[nr][nc]!=newColour && image[nr][nc]==oldColour)
+                 {
+                     imageCopy[nr][nc]=newColour;
+                     q.push({nr,nc});
+                 }
+             }
+        }
+     }
+
+     
+ }
 public:
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
         // Code here 
         vector<vector<int>> imageCopy=image;
         
-        DFSFloodFill(image,imageCopy,sr,sc,newColor,image[sr][sc],image.size(),image[0].size());
+        BFSFloodFill(image,imageCopy,sr,sc,newColor,image[sr][sc],image.size(),image[0].size());
         return imageCopy;
         
         
     }
 };
 
-//{ Driver Code Starts.
 int main(){
 	int tc;
 	cin >> tc;
