@@ -36,6 +36,18 @@ class Solution {
         }
         return false;
     }
+bool DFSCycle(vector<int> adj[],vector<int> &visited,int node,int parent){
+        visited[node]=1;
+        for(auto it:adj[node])
+        {
+            if(visited[it]!=1) 
+            {
+                if(DFSCycle(adj,visited,it,node)) return true;
+            }
+            else if(parent!=it) return true;
+        }
+        return false;
+    }
   public:
     // Function to detect cycle in an undirected graph.
     bool isCycle(int V, vector<int> adj[]) {
