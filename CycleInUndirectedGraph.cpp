@@ -1,3 +1,12 @@
+//TC:N times we are doing BFS 
+In BFS we are visiting adjacent nodes
+summation of adjacent nodes=Total degree= 2 X Edges (Only applicable in undirected graph)
+BFS calls are not made for each node
+
+So, O(N + 2E) +O(N) (for for loop )
+
+Space Complexity :O(N)
+
 //{ Driver Code Starts
 #include <bits/stdc++.h>
 using namespace std;
