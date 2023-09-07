@@ -1,0 +1,28 @@
+ vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
+    {
+        
+        // Code here
+       
+       
+       set<pair<int,int>> st;
+       st.insert({0,S});
+       vector<int> dist(V,1e9);
+       dist[S]=0;
+       while(!st.empty())
+       {
+           auto it=*(st.begin());
+           int edgeWeight=it.first;
+           int node=it.second;
+           st.erase(it);
+           for(auto it:adj[node])
+           {
+               if(edgeWeight+it[1]<dist[it[0]])
+               {
+                   if(dist[it[0]]==1e9) st.erase({dist[it[0]],it[0]});
+                   dist[it[0]]=edgeWeight+it[1];
+                   st.insert({dist[it[0]],it[0]});
+               }
+           }
+       }
+       return dist;
+    }
