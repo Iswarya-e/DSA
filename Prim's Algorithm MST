@@ -1,0 +1,28 @@
+ int spanningTree(int V, vector<vector<int>> adj[])
+    {
+        // code here
+        priority_queue<pair<int,int>,
+        vector<pair<int,int>>,
+        greater<pair<int,int>>>pq;
+        vector<int> visited(V,0);
+        pq.push({0,0});
+    
+        int sum=0;
+        while(!pq.empty())
+        {
+            auto it=pq.top();
+            pq.pop();
+            int node=it.second;
+            int dist=it.first;
+            if(visited[node]==1) continue;//if visited already continue
+            sum+=dist;
+            visited[node]=1;
+            for(auto it:adj[node])
+            {
+                if(visited[it[0]]==0)//if adj node is  not visited add it to pq
+                    pq.push({it[1],it[0]});
+            }
+            
+        }
+        return sum;
+    }
