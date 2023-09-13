@@ -1,0 +1,49 @@
+class DisjointSet{
+    public:
+    vector<int> parent, size;
+    DisjointSet(int nodes)
+    {
+        size.resize(nodes+1,1);
+        parent.resize(nodes+1,0);
+        for(int i=0;i<=nodes;i++) parent[i]=i; 
+    }
+    int findParent(int node)
+    {
+        if(node==parent[node]) return node;
+        return parent[node]=findParent(parent[node]);
+    }
+    void UnionBySize(int u, int v)
+    {
+        int ultimateP_u=findParent(u);
+        int ultimateP_v=findParent(v);
+        if(ultimateP_u==ultimateP_v) return;
+        if(size[ultimateP_u]<size[ultimateP_v])
+        {
+            parent[ultimateP_u]=ultimateP_v;
+            size[ultimateP_v]+=size[ultimateP_u];
+        }
+        else{
+            parent[ultimateP_v]=ultimateP_u;
+            size[ultimateP_u]+=size[ultimateP_v];
+        }
+    }
+};
+
+ int numProvinces(vector<vector<int>> adj, int V) {
+        // code here
+        DisjointSet ds(V);
+        for(int i=0;i<V;i++)
+        {
+            for(int j=0;j<V;j++)
+            {
+                if(adj[i][j]==1) ds.UnionBySize(i,j);
+            }
+        }
+        int count=0;
+        for(int i=0;i<V;i++)
+        {
+            if(ds.parent[i]==i) count++;
+        }
+
+        return count;
+    }
