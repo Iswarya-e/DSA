@@ -10,7 +10,7 @@ class Solution {
         {
             int nr=r+dr[i];
             int nc=c+dc[i];
-            if(nr>=0 && nc>=0 && nr<m && nr<n && visited[nr][nc]==0 && board[nr][nc]=='O')
+            if(nr>=0 && nc>=0 && nr<m && nc<n && visited[nr][nc]==0 && board[nr][nc]=='O')
             {
                 DFSXO(visited,board,nr,nc);
             }
@@ -18,30 +18,32 @@ class Solution {
     }
 public:
     void solve(vector<vector<char>>& board) {
+
         int m=board.size();
         int n=board[0].size();
+        if(m==1 && n==1) return ;
         vector<vector<int>> visited(m,vector<int>(n,0));
         for(int i=0;i<m;i++)
         {
-            if(board[i][0]=='O' && visited[i][0]==0)
+            if(visited[i][0]==0 && board[i][0]=='O' )
             {
                   DFSXO(visited,board,i,0);
             }
-            if(board[i][n-1]=='O' && visited[i][n-1]==0)
+            if(visited[i][n-1]==0 && board[i][n-1]=='O' )
             {
                 DFSXO(visited,board,i,n-1);  
             }
         }
        
-        for(int i=0;i<n;i++)
+        for(int j=0;j<n;j++)
         {
-            if(board[0][i]=='O' && visited[0][i]==0)
+            if(visited[0][j]==0 && board[0][j]=='O' )
             {
-                DFSXO(visited,board,0,i);  
+                DFSXO(visited,board,0,j);  
             }
-            if(board[m-1][i]=='O' && visited[m-1][i]==0)
+            if( visited[m-1][j]==0 && board[m-1][j]=='O')
             {
-                 DFSXO(visited,board,m-1,i);
+                 DFSXO(visited,board,m-1,j);
             }
         }
 
