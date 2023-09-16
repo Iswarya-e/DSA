@@ -1,85 +1,42 @@
 class Solution {
  private:
-    
- void BFS(int row,int col,vector<vector<int>> &vis,vector<vector<char>> &grid)
+ void DFSIslands(vector<vector<int>>& visited,vector<vector<char>>& grid, int row, int col)
  {
-    vis[row][col]=1;
-    queue<pair<int,int>> q;
-    q.push({row,col});
-    int maxr=grid.size();
-    int maxc=grid[0].size();
-    while(!q.empty())
-    {
-        int r=q.front().first;
-        int c=q.front().second;
-        q.pop();
-        for(int i=-1;i<=1;i++)
-        {
-            for(int j=-1;j<=1;j++)
-            {
-                if((abs(i)==abs(j))) continue;
-                int currrow=r+i;
-                int currcol=c+j;
-                if(currrow>=0 && currcol>=0 && currrow<maxr && currcol<maxc 
-                && grid[currrow][currcol]=='1' && !vis[currrow][currcol])
-                {
-                    vis[currrow][currcol]=1;
-                    q.push({currrow,currcol});
-                }
-            }
-        }
-            
-    }
-}
-void DFS(int row,int col,vector<vector<int>> &vis,vector<vector<char>> &grid)
-{
-    vis[row][col]=1;
-    stack<pair<int,int>> q;
-    q.push({row,col});
-    int maxr=grid.size();
-    int maxc=grid[0].size();
-    while(!q.empty())
-    {
-        int r=q.top().first;
-        int c=q.top().second;
-        q.pop();
-        for(int i=-1;i<=1;i++)
-        {
-            for(int j=-1;j<=1;j++)
-            {
-                if((abs(i)==abs(j))) continue;
-                int currrow=r+i;
-                int currcol=c+j;
-                if(currrow>=0 && currcol>=0 && currrow<maxr && currcol<maxc 
-                && grid[currrow][currcol]=='1' && !vis[currrow][currcol])
-                {
-                    vis[currrow][currcol]=1;
-                    q.push({currrow,currcol});
-                }
-            }
-        }
-            
-    }
-}
+     int m=grid.size();
+     int n=grid[0].size();
+     visited[row][col]=1;
+     int dr[]={0,0,-1,1};
+     int dc[]={-1,1,0,0};
+     for(int i=0;i<4;i++)
+     {
+         int nr=row+dr[i];
+         int nc=col+dc[i];
+         if(nr>=0 && nc>=0 && nr<m && nc<n && grid[nr][nc]=='1' && visited[nr][nc]==0)
+         {
+             DFSIslands(visited,grid,nr,nc);
+         }
+
+     }
+ }
+
 public:
     int numIslands(vector<vector<char>>& grid) {
-        int row=grid.size();
-        int col=grid[0].size();
-        vector<vector<int>> vis(row,vector<int>(col,0));
-        int count=0;
-        for(int i=0;i<row;i++)
-        {
-            for(int j=0;j<col;j++)
-            {
-                if(!vis[i][j] && grid[i][j]=='1')
-                {
-                    count++;
-                    //BFS(i,j,vis,grid);
-                    DFS(i,j,vis,grid);
+       int m=grid.size();
+       int n=grid[0].size();
+       vector<vector<int>> visited(m,vector<int>(n,0));
+       int islands=0;
+       for(int i=0;i<m;i++)
+       {
+           for(int j=0;j<n;j++)
+           {
+               if(visited[i][j]==0 and grid[i][j]=='1')
+               {
+                   islands++;
+                   DFSIslands(visited,grid,i,j);
+               }
+           }
+       }
+       return islands;
 
-                }
-            }
-        }
-        return count;
     }
 };
