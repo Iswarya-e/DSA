@@ -1,0 +1,15 @@
+void moveZeroes(vector<int>& arr) {
+        int j=0;
+        int n=arr.size();
+        //O(N)
+        for(int i=0;i<arr.size();i++)
+        {
+            if(arr[i]!=0)
+                 arr[j++]=arr[i]; //O(n-d)
+            
+        }
+        while(j<n)
+        {
+            arr[j++]=0;           //O(d)
+        }
+    }//O(n)
