@@ -1,0 +1,22 @@
+int missingNumber(vector<int>&a, int N) {
+    // Write your code here.
+    bool found;
+    for(int i=1;i<=N;i++)
+    {
+        found=false;
+        for(int j=0;j<N;j++)
+        {
+            if(a[j]==i)
+            {
+                found=true;
+            }
+        }
+        if(found==false)
+        {
+            return i;
+        }
+        
+    }
+    
+    
+}
