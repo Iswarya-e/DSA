@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int minLengthAfterRemovals(vector<int>& a) {
+        priority_queue<int> pq;
+        unordered_map<int,int> mp;
+        for(int i=0;i<a.size();i++)
+        {
+            mp[a[i]]++;
+        }
+        for(auto it:mp)
+        {
+            pq.push(it.second);
+        }
+        while(pq.size()>1)
+        {
+            int val1=pq.top();
+            pq.pop();
+            int val2=pq.top();
+            pq.pop();
+            val1--;
+            val2--;
+            if(val1) pq.push(val1);
+            if(val2) pq.push(val2);
+            
+        }
+        if(!pq.empty()) return pq.top();
+        return 0;
+        
+        
+    }
+};
