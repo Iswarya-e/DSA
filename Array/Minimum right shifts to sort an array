@@ -1,0 +1,17 @@
+int minimumRightShifts(vector<int>& a) {
+        int n=a.size();
+        int count=0;
+        int index=0;
+        int indexCount=0;
+        for(int i=1;i<a.size();i++)
+        {
+            if(a[i-1]>a[i]){
+                index=i;
+                indexCount++;
+            }
+        }
+        if(index==0) return 0;
+        if(indexCount>1) return -1;
+        return (a[n-1]>a[0])?-1:a.size()-index;
+        
+    }
