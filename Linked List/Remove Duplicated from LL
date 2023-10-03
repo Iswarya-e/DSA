@@ -17,3 +17,20 @@ public:
         return head;
     }
 };
+//Using single pointer
+
+ListNode* deleteDuplicates(ListNode* head) {
+     
+         if(head==NULL) return NULL;
+
+        ListNode* node=head;
+        while(node!=NULL)
+        {
+            if(node->next!=NULL && node->val==node->next->val)
+            {
+                node->next=node->next->next;
+            }
+            node=node->next;
+        }
+        return head;
+    }
