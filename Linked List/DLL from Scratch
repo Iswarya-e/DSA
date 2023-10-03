@@ -1,0 +1,209 @@
+#include <iostream>
+using namespace std;
+class Node{
+    public:
+    int value;
+    Node* next;
+    Node* prev;
+    Node(int val)
+    {
+        this->value=val;
+        this->next=NULL;
+        this->next=NULL;
+    }
+};
+
+class LL{
+    public:
+    
+    Node* head;
+    int size;
+    LL()
+    {
+        size=0;
+        head=NULL;
+    }
+    void insertFirst(int val)
+    {
+        Node* node=new Node(val);
+        if(head==NULL)
+        {
+            head=node;
+            size++;
+            return;
+        }
+        
+        node->next=head;
+        head->prev=node;
+        head=node;
+        size++;
+    }
+    
+    void insertLast(int val)
+    {
+        Node* node=new Node(val);
+        if(head==NULL){
+            insertFirst(val);
+            return;
+        }
+        Node* temp=head;
+        while(temp->next!=NULL)
+        {
+            temp=temp->next;
+        }
+        temp->next=node;
+        node->prev=temp;
+        size++;
+
+    }
+    void insertIndex(int val,int index)
+    {
+        if(index==0){
+            insertFirst(val);
+            return;
+        }
+        if(index==size)
+        {
+            insertLast(val);
+            return;
+        }
+        Node* newnode=new Node(val);
+        if(head==NULL)
+        {
+            head=newnode;
+            return;
+        }
+        Node* temp=head;
+        for(int i=0;i<index-1;i++)
+        {
+            temp=temp->next;
+        }
+        Node* nextNode=temp->next;
+        newnode->next=nextNode;
+        newnode->prev=temp;
+        temp->next=newnode;
+        nextNode->prev=newnode;
+        
+    
+        size++;
+        
+        
+    }
+    
+    void deleteFirst()
+    {
+        if(head==NULL) return;
+        if(size==1) {
+            head=NULL;
+            size=0;
+            return;
+        }
+        head->next->prev=NULL;
+        head=head->next;
+        size--;
+    }
+    void deletelast()
+    {
+       if(head==NULL) return;
+       if(size==1) {
+            head=NULL;
+            size=0;
+            return;
+        }
+        Node* temp=head;
+        Node* prev=NULL;
+        while(temp->next!=NULL)
+        {
+            prev=temp;
+            temp=temp->next;
+        }
+        prev->next=NULL;
+        size--;
+    }
+    
+    void deleteIndex(int index)
+    {
+        if(index==0) 
+        {
+            deleteFirst();
+            
+            return;
+        }
+        if(index==size-1)
+        {
+            deletelast();
+            return;
+        }
+        Node* temp=head;
+        for(int i=0;i<index-1;i++)
+        {
+            temp=temp->next;
+        }
+        Node* currNode=temp->next;
+        temp->next=currNode->next;
+        currNode->next->prev=temp;
+        size--;
+    }
+    void display()
+    {
+        
+        Node* temp=head;
+        while(temp!=NULL)
+        {
+            cout<<temp->value<<"-->";
+            temp=temp->next;
+            
+        }
+        cout<<"END  Size:"<<size<<endl;
+    }
+    void reverseDisplay()
+    {
+        Node* revtemp=NULL;
+        Node* temp=head;
+        while(temp!=NULL)
+        {
+            //cout<<temp->val<<"-->";
+            revtemp=temp;
+            temp=temp->next;
+        }
+        
+        while(revtemp!=NULL)
+        {
+            cout<<revtemp->value<<"-->";
+            revtemp=revtemp->prev;
+        }
+        cout<<"END  Size:"<<size<<endl;
+    }
+};
+int main() {
+	// your code goes here
+	
+	LL ll1;
+	//ll1.insertFirst(1);//ll1.insert(2);
+	//ll1.insertFirst(2);
+	//ll1.insertFirst(3);
+	//ll1.insertFirst(4);
+	//ll1.insertFirst(6);
+	
+    ll1.display();
+    //ll1.reverseDisplay();
+    //ll1.deleteFirst();
+    ll1.insertLast(5);
+    ll1.insertFirst(6);
+    ll1.insertFirst(4);
+    ll1.display();
+    ll1.insertIndex(2,2);
+    ll1.display();
+    ll1.insertIndex(7,2);
+    ll1.display();
+    ll1.deleteFirst();
+    ll1.display();
+    ll1.deletelast();
+    ll1.display();
+    ll1.deleteIndex(1);
+    ll1.display();
+    ll1.deleteIndex(1);
+    ll1.display();
+
+	return 0;
+}
