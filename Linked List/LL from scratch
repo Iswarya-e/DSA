@@ -1,0 +1,150 @@
+#include <iostream>
+using namespace std;
+class Node{
+    public:
+    int value;
+    Node* next;
+    Node(int val)
+    {
+        this->value=val;
+        this->next=NULL;
+    }
+};
+
+class LL{
+    public:
+    
+    Node* head;
+    Node* tail;
+    int size;
+    LL()
+    {
+        size=0;
+        head=NULL;
+        tail=NULL;
+    }
+    void insert(int val)
+    {
+        Node* node=new Node(val);
+        
+        if(this->head==NULL||this->tail==NULL)
+        {
+            insertAtFirst(val);
+            tail=head;
+        }
+        else{
+            tail->next=node;
+            tail=node;
+            this->size++;
+        }
+    }
+    void insertAtFirst(int val)
+    {
+        Node* node=new Node(val);
+        node->next=head;
+        head=node;
+        
+        this->size++;
+    }
+    void insertAttheMid(int val,int index)
+    {
+        if(index>=size) return;
+        if(index==0){
+            insertAtFirst(val);
+            return;
+        }
+        if(index==size-1){
+            insert(val);
+            return;
+        }
+        Node* node=new Node(val);
+        Node* temp=head;
+        for(int i=0;i<index-1;i++)
+        {
+            temp=temp->next;
+        }
+        node->next=temp->next;
+        temp->next=node;
+        size++;
+    }
+    
+    void deleteFirst()
+    {
+        if(head!=NULL)
+        head=head->next;
+        if(head==NULL) tail=NULL;
+        size--;
+    }
+    void deletelast()
+    {
+        if(head==NULL || tail==NULL) return;
+        Node* temp=head;
+        Node* prev=head;
+        if(size==1) 
+        {
+            head=NULL;
+            tail=NULL;
+            size=0;
+            return;
+        }
+        
+        while(temp->next!=NULL)
+        {
+            prev=temp;
+            temp=temp->next;
+        }
+        prev->next=NULL;
+        tail=prev;
+        size--;
+    }
+    
+    void deleteIndex(int index)
+    {
+        Node* temp=head;
+        if(index==0) 
+        {
+            deleteFirst();
+            return;
+        }
+        if(index==size-1)
+        {
+            deletelast();
+            return;
+        }
+        for(int i=0;i<index-1;i++)
+        {
+            temp=temp->next;
+        }
+        temp->next=temp->next->next;
+        size--;
+        
+    }
+    
+    void display(){
+        Node* temp=head;
+        while(temp!=NULL)
+        {
+            cout<<temp->value<<"-->";
+            temp=temp->next;
+        }
+        cout<<"End"<<endl<<this->size<<endl;
+    }
+};
+int main() {
+	// your code goes here
+	
+	LL ll1;
+	ll1.insert(1);//ll1.insert(2);
+	ll1.insert(3);
+	ll1.insert(4);
+	ll1.insert(5);
+	ll1.insertAttheMid(2,5);
+	
+    ll1.display();
+    //ll1.deleteFirst();
+   // ll1.display();
+
+    ll1.deleteIndex(1);
+    ll1.display();
+	return 0;
+}
