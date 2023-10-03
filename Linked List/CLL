@@ -1,0 +1,115 @@
+#include <iostream>
+using namespace std;
+class Node{
+    public:
+    int value;
+    Node* next;
+    Node* prev;
+    Node(int val)
+    {
+        this->value=val;
+        this->next=NULL;
+        this->next=NULL;
+    }
+};
+
+class CLL{
+    public:
+    
+    Node* head;
+    Node* tail;
+    int size;
+    CLL()
+    {
+        size=0;
+        head=NULL;
+        tail=NULL;
+    }
+    
+    
+    void insertLast(int val)
+    {
+        Node* node=new Node(val);
+        if(head==NULL){
+            head=node;
+            tail=node;
+            return;
+        }
+        node->next=head;
+        tail->next=node;
+        tail=node;
+        size++;
+
+    }
+    
+    void deleteany(int val)
+    {
+        Node* temp=head;
+        Node* prev=tail;
+        while(temp!=NULL)
+        {
+            if(temp->value==val)
+            {
+                break;
+            }
+            prev=prev->next;
+            temp=temp->next;
+        }
+        if(temp==head) {
+            head=head->next;
+            tail->next=head;
+            size--;
+            return;
+        }
+        if(temp==tail)
+        {
+            tail=prev;
+            tail->next=head;
+            size--;
+            return;
+        }
+        prev->next=temp->next;
+        size--;
+        
+    }
+    
+    void display()
+    {
+        
+        Node* temp=head;
+        
+        do{
+            cout<<temp->value<<" ";
+            temp=temp->next;
+        }while(temp!=head);
+        cout<<"END  Size:"<<size<<endl;
+    }
+    
+};
+int main() {
+	// your code goes here
+	
+	CLL ll1;
+	//ll1.insertFirst(1);//ll1.insert(2);
+	//ll1.insertFirst(2);
+	//ll1.insertFirst(3);
+	//ll1.insertFirst(4);
+	//ll1.insertFirst(6);
+	
+    //ll1.display();
+    //ll1.reverseDisplay();
+    //ll1.deleteFirst();
+    ll1.insertLast(5);
+    ll1.insertLast(4);
+    ll1.insertLast(3);
+    ll1.insertLast(2);
+    
+    ll1.display();
+    ll1.deleteany(2);
+    ll1.display();
+    ll1.deleteany(5);
+    ll1.display();
+    ll1.deleteany(4);
+    ll1.display();
+	return 0;
+}
