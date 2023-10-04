@@ -2,11 +2,11 @@ bool hasCycle(ListNode *head) {
         ListNode* fast=head;
         ListNode* slow=head;
 
-        while(slow->next!=NULL && fast->next->next!=NULL)
+        while(fast!=NULL and fast->next!=NULL)
         {
             fast=fast->next->next;
             slow=slow->next;
-            if(fast->val==slow->val) return true;
+            if(fast==slow) return true;
         }
         return false;
     }
