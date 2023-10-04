@@ -10,19 +10,15 @@ int countNodesinLoop(struct Node *head)
         slow=slow->next;
         if(slow==fast)
         {
-            isCycle=true;
-            break;
+            int count=1;
+            slow=slow->next;
+            while(slow!=fast)
+            {
+               count++;
+               slow=slow->next;
+            }
+            return count;
         }
     }
-    if(!isCycle) return 0;
-    
-    int count=1;
-    slow=slow->next;
-    while(slow!=fast)
-    {
-       count++;
-       slow=slow->next;
-    }
-    return count;
-    // Code here
+    return 0;
 }
