@@ -1,0 +1,28 @@
+bool isPalindrome(ListNode* head) {
+        ListNode* slow=head;
+        ListNode* fast=head;
+        while(fast!=NULL and fast->next!=NULL)
+        {
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        ListNode* prev=NULL;
+        ListNode* curr=slow;
+        while(curr!=NULL)
+        {
+            ListNode* temp=curr;
+            curr=curr->next;
+            temp->next=prev;
+            prev=temp;
+        }
+        
+        while(prev!=NULL)
+        {
+            if(head->val!=prev->val) return false;
+            head=head->next;
+            prev=prev->next;
+        }
+        return true;
+
+
+    }
