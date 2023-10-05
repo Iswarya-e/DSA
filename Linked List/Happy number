@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int findSquare(int a)
+    {
+        int sum=0;
+        while(a>0)
+        {
+            int digit=a%10;
+            sum+=digit*digit;
+            a/=10;
+        }
+        return sum;
+    }
+    bool isHappy(int n) {
+        int slow=n;
+        int fast=n;
+        do{
+            slow=findSquare(slow);
+            fast=findSquare(findSquare(fast));
+        }
+        while(slow!=fast);
+
+        if(slow==1) return true;
+        return false;
+    }
+};
